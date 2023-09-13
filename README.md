@@ -26,5 +26,3 @@ usethis::use_course(
   'jakesboles/Boles_et-al_brain_immune_scRNAseq',
   destdir = 'PATH/TO/DIRECTORY')
 ```
-)
-}
