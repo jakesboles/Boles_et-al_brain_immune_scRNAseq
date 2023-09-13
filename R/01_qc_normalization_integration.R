@@ -44,13 +44,43 @@ p4 <- QC_Plots_Complexity(obj, high_cutoff = 0.8)
 (QC1 <- wrap_plots(p1, p2, p3, p4, ncol = 4))
 
 #Filter on percent_mito and recheck QC metrics----
+obj_clean <- subset(obj, percent_mito < 5)
 
 #Filter on nCount and recheck QC metrics----
+obj_clean <- subset(obj_clean, nCount_RNA > 800 & nCount_RNA < 45000)
 
 #Filter on nFeature and recheck QC metrics----
+obj_clean <- subset(obj_clean, nFeature_RNA > 250 & nFeature_RNA < 6500)
 
 #Filter on cell complexity and recheck QC metrics----
+obj_clean <- subset(obj_clean, log10GenesPerUMI > 0.8)
 
 #Summary stats on final cleaned object----
-stats_raw <- Median_Stats(obj, group_by_var = "orig.ident")
-stats_clean <- Median_Stats(obj_clean, group_by_var = "orig.ident")
+med_stats_raw <- Median_Stats(obj, group_by_var = "orig.ident")
+med_stats_clean <- Median_Stats(obj_clean, group_by_var = "orig.ident")
+
+stats_raw <- obj@meta.data %>%
+  as.data.frame() %>%
+  group_by(orig.ident) %>%
+  summarise(Cell_Count = n()) %>%
+  adorn_totals("row") %>%
+  dplyr::select(-1) %>%
+  cbind(med_stats_raw)
+
+stats_clean <- obj_clean@meta.data %>%
+  as.data.frame() %>%
+  group_by(orig.ident) %>%
+  summarize(Cell_Count = n()) %>%
+  adorn_totals("row") %>%
+  dplyr::select(-1) %>%
+  cbind(med_stas_clean)
+
+stats_raw[, c(2, 1, 3:ncol(stats_raw))] %>%
+  kbl(format = "html") %>%
+  kable_styling(bootstrap_options = c("striped", "bordered")) %>%
+  save_kable(file = "stats/raw_qc.html")
+
+stats_clean[, c(2, 1, 3:ncol(stats_clean))] %>%
+  kbl(format = "html") %>%
+  kable_styling(bootstrap_options = c("striped", "bordered")) %>%
+  save_kable(file = "stats/filtered_qc.html")
