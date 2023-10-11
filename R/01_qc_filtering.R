@@ -91,4 +91,29 @@ stats_clean[, c(2, 1, 3:ncol(stats_clean))] %>%
   kable_styling(bootstrap_options = c("striped", "bordered")) %>%
   save_kable(file = "stats/filtered_qc.html")
 
-#Integrate samples on batch with RPCA for normalization purposes
+#Integrate samples on BATCH with RPCA for normalization purposes according to 
+##https://satijalab.org/seurat/articles/integration_rpca.html
+obj_list <- SplitObject(obj_clean, split.by = "Batch")
+rm("obj_clean")
+obj_list <- lapply(obj_list, FUN = SCTransform, method = "glmGamPoi")
+features <- SelectIntegrationFeatures(obj_list, nfeatures = 3000)
+obj_list <- PrepSCTIntegration(obj_list, anchor.features = features)
+obj_list <- lapply(obj_list, FUN = RunPCA, features = features, npcs = 100)
+anchors1 <- FindIntegrationAnchors(obj_list, normalization.method = "SCT",
+                                   anchor.features = features, dims = 1:30,
+                                   reduction = "rpca", k.anchor = 5)
+intg1 <- IntegrateData(anchorset = anchors1, normalization.method = "SCT", 
+                       dims = 1:30)
+rm(list = c("obj_list", "features", "anchors1"))
+#Performing PCA, dimensional reduction on integrated object----
+intg1 <- RunPCA(intg1, verbose = F, npcs = 100)
+
+ElbowPlot(intg1, ndims = 100)
+ggsave(paste0(plots, "initial_PCA_elbow.png"), units = "in",
+       dpi = 600, width = 6, height = 6)
+
+intg1 <- RunUMAP(intg1, reduction = "pca", dims = 1:30, verbose = F) %>%
+  FindNeighbors(reduction = "pca", dims = 1:30) %>%
+  FindClusters(resolution = 0.2)
+
+saveRDS(intg1, file = "data_objects/01_batch_integrated.RDS")
