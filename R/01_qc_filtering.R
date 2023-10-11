@@ -13,9 +13,37 @@ plots <- "plots/01_qc_normalization"
 #file path to save stats
 stats <- "tabular_output/"
 
-#ADD DATA LOADING OBJECT AFTER 00 IS DONE 
+#Load raw data into Seurat objects and assemble ---- 
+s1.data <- Read10X(data.dir = "raw_data/sample1/")
+s1 <- CreateSeuratObject(counts = s1.data, min.cells = 3, min.features = 200,
+                         project = "sample1")
+s2.data <- Read10X(data.dir = "raw_data/sample2/")
+s2 <- CreateSeuratObject(counts = s2.data, min.cells = 3, min.features = 200,
+                         project = "sample2")
+s3.data <- Read10X(data.dir = "raw_data/sample3/")
+s3 <- CreateSeuratObject(counts = s3.data, min.cells = 3, min.features = 200,
+                         project = "sample3")
+s4.data <- Read10X(data.dir = "raw_data/sample4/")
+s4 <- CreateSeuratObject(counts = s4.data, min.cells = 3, min.features = 200,
+                         project = "sample4")
+s5.data <- Read10X(data.dir = "raw_data/sample5/")
+s5 <- CreateSeuratObject(counts = s5.data, min.cells = 3, min.features = 200,
+                         project = "sample5")
+s6.data <- Read10X(data.dir = "raw_data/sample6/")
+s6 <- CreateSeuratObject(counts = s6.data, min.cells = 3, min.features = 200,
+                         project = "sample6")
+s7.data <- Read10X(data.dir = "raw_data/sample7/")
+s7 <- CreateSeuratObject(counts = s7.data, min.cells = 3, min.features = 200,
+                         project = "sample7")
+s8.data <- Read10X(data.dir = "raw_data/sample8/")
+s8 <- CreateSeuratObject(counts = s8.data, min.cells = 3, min.features = 200,
+                         project = "sample8")
+obj <- merge(s1, y = c(s2, s3, s4, s5, s6, s7, s8),
+             add.cell.ids = c("sample1", "sample2", "sample3", "sample4",
+                              "sample5", "sample6", "sample7", "sample8"),
+             project = "PIPseq1")
 
-#Adding necessary sample metadata, including treatment groups----
+#Adding necessary sample metadata, including treatment groups ----
 meta <- data.frame(obj@meta.data) %>%
   rownames_to_column(var = "cell_name") %>%
   as_tibble()
