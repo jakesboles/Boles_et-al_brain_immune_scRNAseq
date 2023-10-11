@@ -177,7 +177,7 @@ stats_clean[, c(2, 1, 3:ncol(stats_clean))] %>%
   save_kable(file = paste0(stats, "qc_filtered.html"))
 
 #Integrate samples on BATCH with RPCA for normalization purposes according to 
-##https://satijalab.org/seurat/articles/integration_rpca.html
+##https://satijalab.org/seurat/articles/integration_rpca.html ----
 obj_list <- SplitObject(obj_clean, split.by = "Batch")
 rm("obj_clean")
 obj_list <- lapply(obj_list, FUN = SCTransform, method = "glmGamPoi")
@@ -190,7 +190,7 @@ anchors1 <- FindIntegrationAnchors(obj_list, normalization.method = "SCT",
 intg1 <- IntegrateData(anchorset = anchors1, normalization.method = "SCT", 
                        dims = 1:30)
 rm(list = c("obj_list", "features", "anchors1"))
-#Performing PCA, dimensional reduction on integrated object----
+#Performing PCA, dimensional reduction on integrated object ----
 intg1 <- RunPCA(intg1, verbose = F, npcs = 100)
 
 ElbowPlot(intg1, ndims = 100)
