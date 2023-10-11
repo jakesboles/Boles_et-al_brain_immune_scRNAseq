@@ -76,20 +76,75 @@ p2 <- QC_Plots_UMIs(obj, low_cutoff = 800, high_cutoff = 45000, y_axis_log = T,
 p3 <- QC_Plots_Mito(obj, high_cutoff = 5,
                     plot_title = "Mito genes per cell")
 p4 <- QC_Plots_Complexity(obj, high_cutoff = 0.8)
-(QC1 <- wrap_plots(p1, p2, p3, p4, ncol = 4))
 
+(QC1 <- wrap_plots(p1, p2, p3, p4, ncol = 4))
+ggsave(paste0(plots, "qc_raw.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 12)
 
 #Filter on percent_mito and recheck QC metrics----
 obj_clean <- subset(obj, percent_mito < 5)
 
+p5 <- QC_Plots_Genes(obj_clean, low_cutoff = 250, high_cutoff = 6500, y_axis_log = T,
+                     plot_title = "Genes per cell")
+p6 <- QC_Plots_UMIs(obj_clean, low_cutoff = 800, high_cutoff = 45000, y_axis_log = T,
+                    plot_title = "UMIs per cell")
+p7 <- QC_Plots_Mito(obj_clean, high_cutoff = 5,
+                    plot_title = "Mito genes per cell")
+p8 <- QC_Plots_Complexity(obj_clean, high_cutoff = 0.8)
+
+(QC2 <- wrap_plots(p5, p6, p7, p8, ncol = 4))
+ggsave(paste0(plots, "qc_filter1_percent_mito.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 12)
+
 #Filter on nCount and recheck QC metrics----
 obj_clean <- subset(obj_clean, nCount_RNA > 800 & nCount_RNA < 45000)
+
+p9 <- QC_Plots_Genes(obj_clean, low_cutoff = 250, high_cutoff = 6500, y_axis_log = T,
+                     plot_title = "Genes per cell")
+p10 <- QC_Plots_UMIs(obj_clean, low_cutoff = 800, high_cutoff = 45000, y_axis_log = T,
+                     plot_title = "UMIs per cell")
+p11 <- QC_Plots_Mito(obj_clean, high_cutoff = 5,
+                     plot_title = "Mito genes per cell")
+p12 <- QC_Plots_Complexity(obj_clean, high_cutoff = 0.8)
+
+(QC3 <- wrap_plots(p9, p10, p11, p12, ncol = 4))
+ggsave(paste0(plots, "qc_filter2_nUMI.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 12)
 
 #Filter on nFeature and recheck QC metrics----
 obj_clean <- subset(obj_clean, nFeature_RNA > 250 & nFeature_RNA < 6500)
 
+p13 <- QC_Plots_Genes(obj_sub3, low_cutoff = 250, high_cutoff = 6500, y_axis_log = T,
+                      plot_title = "Genes per cell")
+p14 <- QC_Plots_UMIs(obj_sub3, low_cutoff = 800, high_cutoff = 45000, y_axis_log = T,
+                     plot_title = "UMIs per cell")
+p15 <- QC_Plots_Mito(obj_sub3, high_cutoff = 5,
+                     plot_title = "Mito genes per cell")
+p16 <- QC_Plots_Complexity(obj_sub3, high_cutoff = 0.8)
+
+(QC4 <- wrap_plots(p13, p14, p15, p16, ncol = 4))
+ggsave(paste0(plots, "qc_filter3_nGenes.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 12)
+
 #Filter on cell complexity and recheck QC metrics----
 obj_clean <- subset(obj_clean, log10GenesPerUMI > 0.8)
+
+p17 <- QC_Plots_Genes(obj_sub4, low_cutoff = 250, high_cutoff = 6500, y_axis_log = T,
+                      plot_title = "Genes per cell")
+p18 <- QC_Plots_UMIs(obj_sub4, low_cutoff = 800, high_cutoff = 45000, y_axis_log = T,
+                     plot_title = "UMIs per cell")
+p19 <- QC_Plots_Mito(obj_sub4, high_cutoff = 5,
+                     plot_title = "Mito genes per cell")
+p20 <- QC_Plots_Complexity(obj_sub4, high_cutoff = 0.8)
+
+(QC5 <- wrap_plots(p17, p18, p19, p20, ncol = 4))
+ggsave(paste0(plots, "qc_filter4_cell_complexity.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 12)
 
 #Summary stats on final cleaned object----
 med_stats_raw <- Median_Stats(obj, group_by_var = "orig.ident")
