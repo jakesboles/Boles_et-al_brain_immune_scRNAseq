@@ -1,4 +1,4 @@
-#Prepare directories as needed and load in data from our GEO submission ----
+#Prepare directories as needed and load in data from our GEO submission
 
 dir.create(c("raw_data", "data_objects", "plots", "tabular_output", "chooseR",
              "cross_entropy_test", "cluster_annotation"))
