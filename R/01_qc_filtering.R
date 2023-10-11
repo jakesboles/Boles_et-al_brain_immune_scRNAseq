@@ -7,7 +7,8 @@ library(janitor)
 library(kableExtra)
 
 #file path to save plots
-plots <- "plots/"
+dir.create("plots/01_qc_normalization")
+plots <- "plots/01_qc_normalization"
 
 #file path to save stats
 stats <- "tabular_output/"
@@ -49,6 +50,7 @@ p3 <- QC_Plots_Mito(obj, high_cutoff = 5,
 p4 <- QC_Plots_Complexity(obj, high_cutoff = 0.8)
 (QC1 <- wrap_plots(p1, p2, p3, p4, ncol = 4))
 
+
 #Filter on percent_mito and recheck QC metrics----
 obj_clean <- subset(obj, percent_mito < 5)
 
@@ -84,12 +86,12 @@ stats_clean <- obj_clean@meta.data %>%
 stats_raw[, c(2, 1, 3:ncol(stats_raw))] %>%
   kbl(format = "html") %>%
   kable_styling(bootstrap_options = c("striped", "bordered")) %>%
-  save_kable(file = paste0(stats, "raw_qc.html"))
+  save_kable(file = paste0(stats, "qc_raw.html"))
 
 stats_clean[, c(2, 1, 3:ncol(stats_clean))] %>%
   kbl(format = "html") %>%
   kable_styling(bootstrap_options = c("striped", "bordered")) %>%
-  save_kable(file = paste0(stats, "filtered_qc.html"))
+  save_kable(file = paste0(stats, "qc_filtered.html"))
 
 #Integrate samples on BATCH with RPCA for normalization purposes according to 
 ##https://satijalab.org/seurat/articles/integration_rpca.html
