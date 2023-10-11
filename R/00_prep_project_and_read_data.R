@@ -1,3 +1,5 @@
+#Prepare directories as needed and load in data from our GEO submission ----
+
 dir.create("01_raw_data")
 
 for (i in seq_along(1:8)){
@@ -5,3 +7,4 @@ for (i in seq_along(1:8)){
   
   #add data download instructions here
 }
+
