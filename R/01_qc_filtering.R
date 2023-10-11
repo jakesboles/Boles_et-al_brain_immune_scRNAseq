@@ -6,6 +6,12 @@ library(ggplot2)
 library(janitor)
 library(kableExtra)
 
+#file path to save plots
+plots <- "plots/"
+
+#file path to save stats
+stats <- "tabular_output/"
+
 #ADD DATA LOADING OBJECT AFTER 00 IS DONE 
 
 #Adding necessary sample metadata, including treatment groups----
@@ -84,3 +90,5 @@ stats_clean[, c(2, 1, 3:ncol(stats_clean))] %>%
   kbl(format = "html") %>%
   kable_styling(bootstrap_options = c("striped", "bordered")) %>%
   save_kable(file = "stats/filtered_qc.html")
+
+#Integrate samples on batch with RPCA for normalization purposes
