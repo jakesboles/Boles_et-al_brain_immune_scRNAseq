@@ -84,12 +84,12 @@ stats_clean <- obj_clean@meta.data %>%
 stats_raw[, c(2, 1, 3:ncol(stats_raw))] %>%
   kbl(format = "html") %>%
   kable_styling(bootstrap_options = c("striped", "bordered")) %>%
-  save_kable(file = "stats/raw_qc.html")
+  save_kable(file = paste0(stats, "raw_qc.html"))
 
 stats_clean[, c(2, 1, 3:ncol(stats_clean))] %>%
   kbl(format = "html") %>%
   kable_styling(bootstrap_options = c("striped", "bordered")) %>%
-  save_kable(file = "stats/filtered_qc.html")
+  save_kable(file = paste0(stats, "filtered_qc.html"))
 
 #Integrate samples on BATCH with RPCA for normalization purposes according to 
 ##https://satijalab.org/seurat/articles/integration_rpca.html
