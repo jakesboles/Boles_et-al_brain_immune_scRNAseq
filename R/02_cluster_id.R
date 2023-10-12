@@ -17,6 +17,8 @@ stats <- "tabular_output/"
 DefaultAssay(obj) <- "integrated"
 obj <- FindClusters(obj, resolution = 0.2)
 
+DefaultAssay(obj) <- "SCT"
+
 #Look at canonical cell markers to help with annotation ----
 DimPlot_scCustom(obj)
 ggsave(paste0(plots, "unlabeled_clusters.png"), units = "in", dpi = 600,
@@ -26,7 +28,9 @@ ggsave(paste0(plots, "unlabeled_clusters.png"), units = "in", dpi = 600,
 FeaturePlot_scCustom(obj, 
                      features = c("Cldn5", "Ly6c1", "Podxl"),
                      label = T,
-                     num_columns = 3) #12
+                     num_columns = 3,
+                     slot = "data",
+                     na_cutoff = 1) #12
 ggsave(paste0(plots, "endothelial_markers.png"), units = "in",
        dpi = 600, height = 5, width = 15)
 
@@ -34,7 +38,9 @@ ggsave(paste0(plots, "endothelial_markers.png"), units = "in",
 FeaturePlot_scCustom(obj, 
                      features = c("Jun", "Fos"), 
                      label = T,
-                     num_columns = 1) #LPS cells and 9
+                     num_columns = 1,
+                     slot = "data",
+                     na_cutoff = 1) #LPS cells and 9
 ggsave(paste0(plots, "jun-fos_umap.png"), units = "in",
        dpi = 600, height = 5, width = 10)
 
@@ -42,7 +48,9 @@ ggsave(paste0(plots, "jun-fos_umap.png"), units = "in",
 FeaturePlot_scCustom(obj, 
                      features = c("Nkg7", "Cd3e", "Cd3g", "Trbc1"),
                      label = T,
-                     num_columns = 2) #13
+                     num_columns = 2,
+                     slot = "data",
+                     na_cutoff = 1) #13
 ggsave(paste0(plots, "t_nk.png"), units = "in",
        dpi = 600, height = 10, width = 10)
 
@@ -50,7 +58,9 @@ ggsave(paste0(plots, "t_nk.png"), units = "in",
 FeaturePlot_scCustom(obj, 
                      features = c("Gja1", "Gfap", "Aqp4"), 
                      label = T,
-                     num_columns = 3) #17
+                     num_columns = 3,
+                     slot = "data",
+                     na_cutoff = 1) #17
 ggsave(paste0(plots, "astrocyte.png"), units = "in",
        dpi = 600, height = 5, width = 10)
 
@@ -58,13 +68,17 @@ ggsave(paste0(plots, "astrocyte.png"), units = "in",
 FeaturePlot_scCustom(obj, 
                      features = c("P2ry12", "Hexb", "Tmem119", "Aif1"),
                      label = T,
-                     num_columns = 2)
+                     num_columns = 2,
+                     slot = "data",
+                     na_cutoff = 1)
 ggsave(paste0(plots, "microglia.png"), units = "in",
        dpi = 600, height = 10, width = 10)
 FeaturePlot_scCustom(obj, 
                      features = c("Ngp", "S100a8", "S100a9", "Ly6g"),
                      label = T,
-                     num_columns = 2) #11
+                     num_columns = 2,
+                     slot = "data",
+                     na_cutoff = 1) #11
 ggsave(paste0(plots, "neutrophil.png"), units = "in",
        dpi = 600, height = 10, width = 10)
 
@@ -72,20 +86,49 @@ ggsave(paste0(plots, "neutrophil.png"), units = "in",
 FeaturePlot_scCustom(obj, 
                      features = c("Olig1", "Olig2"), 
                      label = T,
-                     num_columns = 2) #22
+                     num_columns = 2,
+                     na_cutoff = 1,
+                     slot = "data") #22
 ggsave(paste0(plots, "oligodendrocytes.png"), units = "in",
        dpi = 600, height = 10, width = 10)
 
-#
-FeaturePlot_scCustom(obj, features = "Col1a2", label = T) #18
-ggsave(paste0(plots, "col1a2_umap.png"), units = "in",
-       dpi = 600, height = 20, width = 20)
+#Choroid plexus
+FeaturePlot_scCustom(obj, 
+                     features = c("Ttr", "Folr1", "Prlr", "Aqp1"), 
+                     slot = "data",
+                     label = T,
+                     na_cutoff = 1,
+                     num_columns = 2)
+ggsave(paste0(plots_path, "choroid_markers.png"), dpi = 600,
+       units = "in", height = 10, width = 10)
+
+#Pericytes
+FeaturePlot_scCustom(obj, 
+                     features = c("Rgs5", "Acta2", "Pdgfrb", "Des"), 
+                     slot = "data", 
+                     label = T,
+                     na_cutoff = 1,
+                     num_columns = 2)
+ggsave(paste0(plots_path, "pericyte_markers.png"), dpi = 600,
+       units = "in", height = 10, width = 10)
+
+#Meningeal/leptomeningeal cells
+FeaturePlot_scCustom(obj, 
+                     features = c("Dcn", "Igfbp2", "Foxc1", "Slc47a1"), 
+                     slot = "data",
+                     label = T,
+                     na_cutoff = 1,
+                     num_columns = 2)
+ggsave(paste0(plots_path, "meningeal_markers.png"), dpi = 600,
+       units = "in", height = 10, width = 10)
 
 #Neurons
 FeaturePlot_scCustom(obj, 
                      features = c("Slc17a7", "Gad2", "Tubb3"), 
                      label = T,
-                     num_columns = 3)
+                     num_columns = 3,
+                     slot = "data",
+                     na_cutoff = 1)
 ggsave(paste0(plots, "neurons.png"), units = "in",
        dpi = 600, height = 5, width = 15)
 
@@ -93,7 +136,9 @@ ggsave(paste0(plots, "neurons.png"), units = "in",
 FeaturePlot_scCustom(obj, 
                      features = c("Cd14", "Ccr2", "Cd163", "Mrc1", "Ly6c2", "Arg1"), 
                      label = T,
-                     num_columns = 3)
+                     num_columns = 3,
+                     slot = "data",
+                     na_cutoff = 1)
 ggsave(paste0(plots, "monocytes_macrophages.png"), units = "in",
        dpi = 600, height = 10, width = 15)
 
@@ -101,7 +146,9 @@ ggsave(paste0(plots, "monocytes_macrophages.png"), units = "in",
 FeaturePlot_scCustom(obj, 
                      features = c("Ptprc", "Itgam"), 
                      label = T,
-                     num_columns = 2)
+                     num_columns = 2,
+                     slot = "data",
+                     na_cutoff = 1)
 ggsave(paste0(plots, "cd45-cd11b.png"), units = "in",
        dpi = 600, height = 5, width = 10)
 
@@ -123,3 +170,5 @@ all_markers <- FindAllMarkers(obj)
 saveRDS(all_markers, "data_objects/cluster_id_1_all_markers.RDS")
 write.xlsx(all_markers, paste0(stats, "cluster_id_1_all_markers.xlsx"))
 saveRDS(obj, "data_objects/01_batch_integrated.RDS")
+
+#Add annotations ----
