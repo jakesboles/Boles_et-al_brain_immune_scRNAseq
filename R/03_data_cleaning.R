@@ -63,7 +63,7 @@ DoHeatmap(tnk.ave, features = unlist(TopFeatures(tnk[["pca"]], balanced = TRUE))
 
 
 tnk.remove <- WhichCells(tnk, idents = 4)
-#What % of cells were removed?
+#What % of cells were kept?
 100*(length(tnk.remove)/length(Cells(tnk)))
 
 tnk.filter <- subset(tnk, cells = setdiff(Cells(tnk), tnk.remove))
@@ -117,7 +117,7 @@ DoHeatmap(b.ave,
           draw.lines = FALSE)
 
 b.remove <- WhichCells(b, idents = c(3, 6))
-#What % of cells were removed?
+#What % of cells were kept?
 100*(length(b.remove)/length(Cells(b)))
 
 #Neutrophil----
@@ -158,7 +158,7 @@ DoHeatmap(neut.ave, features = unlist(TopFeatures(neut[["pca"]], balanced = TRUE
           draw.lines = FALSE)
 
 neut.remove <- WhichCells(neut, idents = c(11, 10))
-#What % of cells were removed?
+#What % of cells were kept?
 100*(length(neut.remove)/length(Cells(neut)))
 
 #Astrocyte----
@@ -200,7 +200,7 @@ DoHeatmap(astro.ave, features = unlist(TopFeatures(astro[["pca"]], balanced = TR
           draw.lines = FALSE)
 
 astro.remove <- WhichCells(astro, idents = c(3,4))
-#What % of cells were removed?
+#What % of cells were kept?
 100*(length(astro.remove)/length(Cells(astro)))
 
 #CNS/Meninges----
@@ -241,7 +241,7 @@ DoHeatmap(cns.ave, features = unlist(TopFeatures(cns[["pca"]], balanced = TRUE))
           draw.lines = FALSE)
 
 cns.remove <- WhichCells(cns, idents = c(0, 4))
-#What % of cells were removed?
+#What % of cells were kept?
 100*(length(cns.remove)/length(Cells(cns)))
 
 #Endothelial/Vascular1----
@@ -283,7 +283,7 @@ DoHeatmap(endo1.ave, features = unlist(TopFeatures(endo1[["pca"]], balanced = TR
           draw.lines = FALSE)
 
 endo1.remove <- WhichCells(endo1, idents = 5)
-#What % of cells were removed?
+#What % of cells were kept?
 100*(length(endo1.remove)/length(Cells(endo1)))
 
 #Endothelial/Vascular2----
@@ -325,7 +325,7 @@ DoHeatmap(endo2.ave, features = unlist(TopFeatures(endo2[["pca"]], balanced = TR
           draw.lines = FALSE)
 
 endo2.remove <- WhichCells(endo2, idents = 5)
-#What % of cells were removed?
+#What % of cells were kept?
 100*(length(endo2.remove)/length(Cells(endo2)))
 
 #Choroid plexus----
@@ -368,7 +368,7 @@ DoHeatmap(cp.ave, features = unlist(TopFeatures(cp[["pca"]], balanced = TRUE)), 
           draw.lines = FALSE)
 
 cp.remove <- WhichCells(cp, idents = 2)
-#What % of cells were removed?
+#What % of cells were kept?
 100*(length(cp.remove)/length(Cells(cp)))
 
 #Monocyte/Macrophage1----
@@ -410,7 +410,7 @@ DoHeatmap(mono1.ave, features = unlist(TopFeatures(mono1[["pca"]], balanced = TR
           draw.lines = FALSE)
 
 mono1.remove <- WhichCells(mono1, idents = 8)
-#What % of cells were removed?
+#What % of cells were kept?
 100*(length(mono1.remove)/length(Cells(mono1)))
 
 #Monocyte/Macrophage2----
@@ -451,7 +451,7 @@ DoHeatmap(mono2.ave, features = unlist(TopFeatures(mono2[["pca"]], balanced = TR
           draw.lines = FALSE)
 
 mono2.remove <- WhichCells(mono2, idents = 3)
-#What % of cells were removed?
+#What % of cells were kept?
 100*(length(mono2.remove)/length(Cells(mono2)))
 
 #Monocyte/Macrophage3----
@@ -492,7 +492,7 @@ DoHeatmap(mono3.ave, features = unlist(TopFeatures(mono3[["pca"]], balanced = TR
           draw.lines = FALSE)
 
 mono3.remove <- WhichCells(mono3, idents = 5)
-#What % of cells were removed?
+#What % of cells were kept?
 100*(length(mono3.remove)/length(Cells(mono3)))
 #Monocyte/Macrophage4----
 mono4 <- subset(obj, idents = "Monocyte/Macrophage4")
@@ -532,7 +532,7 @@ DoHeatmap(mono4.ave, features = unlist(TopFeatures(mono4[["pca"]], balanced = TR
           draw.lines = FALSE)
 
 mono4.remove <- WhichCells(mono4, idents = 4)
-#What % of cells were removed?
+#What % of cells were kept?
 100*(length(mono4.remove)/length(Cells(mono4)))
 
 #Now the actual subsetting and re-integrating----
