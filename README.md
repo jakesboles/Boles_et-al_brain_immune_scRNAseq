@@ -12,7 +12,7 @@ Jake Sondag Boles<sup>1</sup>, Oihane Uriarte Huarte, & Malú Gámez Tansey, 202
 
 ## Original single-cell RNA sequencing data:
 
-## Code and relevant external resources:
+## Code:
 This project was run in R v4.2-4.3. This repository will load version-controlled packages using the `renv` package. Certain key analyses, including normalization and integration of data, was done through the University of Florida's HiPerGator cluster. 
 
 To get started, open a new R session and run:
@@ -27,3 +27,5 @@ usethis::use_course(
   'jakesboles/Boles_et-al_brain_immune_scRNAseq',
   destdir = 'PATH/TO/DIRECTORY')
 ```
+
+## Relevant external resources:
