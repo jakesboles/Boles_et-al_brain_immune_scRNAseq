@@ -13,7 +13,7 @@ Jake Sondag Boles<sup>1</sup>, Oihane Uriarte Huarte, & Malú Gámez Tansey, 202
 ## Original single-cell RNA sequencing data:
 
 ## Code:
-This project was run in R v4.2-4.3. This repository will load version-controlled packages using the `renv` package. Certain key analyses, including normalization and integration of data, was done through the University of Florida's HiPerGator cluster. 
+This project was run in R v4.2-4.3. This repository will load version-controlled packages using the `renv` package. Certain key analyses, including normalization and integration of data, were done through the University of Florida's HiPerGator 3.0 cluster with up to 24 CPUs and 185GB RAM. If you intend to run this analysis yourself, I would recommend loading this repository onto your institution's high-performance cluster.
 
 To get started, open a new R session and run:
 ```
