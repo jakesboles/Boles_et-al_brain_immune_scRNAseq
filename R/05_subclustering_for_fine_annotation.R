@@ -1,3 +1,7 @@
+#Now that clusters are broadly annotated, we will subset the object by those broad
+#clusters, re-integrate and re-normalize, and eventually finely annotate
+#This script is devoted to subsetting and re-integrating
+
 library(glmGamPoi)
 library(Seurat)
 library(tidyverse)
