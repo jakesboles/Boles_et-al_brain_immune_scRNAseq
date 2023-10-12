@@ -1,4 +1,4 @@
-#This script employs the chooseR iterative subsampling procedure on the B-cell cluster
+#This script employs the chooseR iterative subsampling procedure on the myeloid cluster
 #chooseR-identified clusters will be annotated in a later script
 
 source("chooseR_helpers/pipeline.R")
