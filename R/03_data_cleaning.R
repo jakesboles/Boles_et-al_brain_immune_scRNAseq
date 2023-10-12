@@ -10,7 +10,7 @@ library(glmGamPoi)
 #After this cleaning, the object is reassembled for the annotation that went into the paper.
 
 dir.create("plots/03_cleaning_microglial_contamination")
-plots <- "plots/03_cleaning_microglial_contamination"
+plots <- "plots/03_cleaning_microglial_contamination/"
 
 obj <- readRDS("data_objects/02_annotated.RDS")
 
@@ -35,32 +35,51 @@ tnk <- FindClusters(tnk, resolution = 0.2)
 
 FeaturePlot(tnk, 
             features = c("Aif1", "Tmem119", "Hexb", "P2ry12"), 
-            slot = "counts")
+            slot = "counts",
+            num_coluns = 2)
+ggsave(paste0(plots, "tnk_microglial_features.png"),
+       units = "in", dpi = 600,
+       height = 8, width = 8)
 
 DimPlot_scCustom(tnk, 
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
                                                                num_colors = 8),
                  pt.size = 3)
+ggsave(pate0(plots, "tnk_dimplot.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 VlnPlot_scCustom(tnk, 
                  features = c("Aif1", "Tmem119", "Hexb", "P2ry12"), 
                  slot = "counts",
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
-                                                          num_colors = 8))
+                                                          num_colors = 8),
+                 num_columns = 2)
+ggsave(paste0(plots, "tnk_microglial_features_vln.png"),
+       units = "in", dpi = 600,
+       height = 8, width = 8)
 
 FeaturePlot(tnk, 
             features = "marsh_microglia_id1", 
             cols = c("navy", "gold"))
+ggsave(paste0(plots, "tnk_microglia_id.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 VlnPlot_scCustom(tnk, 
                  features = "marsh_microglia_id1",
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
                                                           num_colors = 8))
+ggsave(paste0(plots, "tnk_microglia_id_vln.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 tnk.ave <- AverageExpression(tnk, assays = "SCT", return.seurat = T)
 DoHeatmap(tnk.ave, features = unlist(TopFeatures(tnk[["pca"]], balanced = TRUE)), size = 3,
           draw.lines = FALSE)
-
+ggsave(paste0(plots, "tnk_marker_heatmap.png"),
+       units = "in", dpi = 600,
+       height = 10, width = 10)
 
 tnk.remove <- WhichCells(tnk, idents = 4)
 #What % of cells were kept?
@@ -87,27 +106,44 @@ b <- FindClusters(b, resolution = 0.2)
 
 FeaturePlot(b, 
             features = c("Aif1", "Tmem119", "Hexb", "P2ry12"), 
-            slot = "counts")
+            slot = "counts",
+            num_columns = 2)
+ggsave(paste0(plots, "b_microglial_features.png"),
+       units = "in", dpi = 600,
+       height = 8, width = 8)
 
 DimPlot_scCustom(b, 
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
                                                           num_colors = 7),
                  pt.size = 3)
+ggsave(pate0(plots, "b_dimplot.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 VlnPlot_scCustom(b, 
                  features = c("Aif1", "Tmem119", "Hexb", "P2ry12", "Cd19", "Cd74"), 
                  slot = "counts",
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
-                                                          num_colors = 7))
+                                                          num_colors = 7),
+                 num_columns = 3)
+ggsave(paste0(plots, "b_microglial_features_vln.png"),
+       units = "in", dpi = 600,
+       height = 8, width = 12)
 
 FeaturePlot(b, 
             features = "marsh_microglia_id1", 
             cols = c("navy", "gold"))
+ggsave(paste0(plots, "b_microglia_id.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 VlnPlot_scCustom(b, 
                  features = "marsh_microglia_id1",
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
                                                           num_colors = 7))
+ggsave(paste0(plots, "b_microglia_id_vln.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 b.ave <- AverageExpression(b, assays = "SCT", return.seurat = T)
 DoHeatmap(b.ave, 
@@ -115,6 +151,9 @@ DoHeatmap(b.ave,
                                         balanced = TRUE)), 
           size = 3,
           draw.lines = FALSE)
+ggsave(paste0(plots, "b_marker_heatmap.png"),
+       units = "in", dpi = 600,
+       height = 10, width = 10)
 
 b.remove <- WhichCells(b, idents = c(3, 6))
 #What % of cells were kept?
@@ -132,30 +171,50 @@ neut <- FindClusters(neut, resolution = 1.5)
 
 FeaturePlot(neut, 
             features = c("Aif1", "Tmem119", "Hexb", "P2ry12"), 
-            slot = "counts")
+            slot = "counts",
+            num_columns = 2)
+ggsave(paste0(plots, "neutrophil_microglial_features.png"),
+       units = "in", dpi = 600,
+       height = 8, width = 8)
 
 DimPlot_scCustom(neut, 
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
                                                           num_colors = 17))
+ggsave(pate0(plots, "neutrophil_dimplot.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 VlnPlot_scCustom(neut, 
                  features = c("Aif1", "Tmem119", "Hexb", "P2ry12", "S100a6", "Camp", "Ngp", "Itgb2"), 
                  slot = "counts",
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
-                                                          num_colors = 17))
+                                                          num_colors = 17),
+                 num_columns = 4)
+ggsave(paste0(plots, "neutrophil_microglial_features_vln.png"),
+       units = "in", dpi = 600,
+       height = 8, width = 16)
 
 FeaturePlot(neut, 
             features = "marsh_microglia_id1", 
             cols = c("navy", "gold"))
+ggsave(paste0(plots, "neutrophil_microglia_id.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 VlnPlot_scCustom(neut, 
                  features = "marsh_microglia_id1",
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
                                                           num_colors = 17))
+ggsave(paste0(plots, "neutrophil_microglia_id_vln.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 neut.ave <- AverageExpression(neut, assays = "SCT", return.seurat = T)
 DoHeatmap(neut.ave, features = unlist(TopFeatures(neut[["pca"]], balanced = TRUE)), size = 3,
           draw.lines = FALSE)
+ggsave(paste0(plots, "neutrophil_marker_heatmap.png"),
+       units = "in", dpi = 600,
+       height = 10, width = 10)
 
 neut.remove <- WhichCells(neut, idents = c(11, 10))
 #What % of cells were kept?
@@ -173,31 +232,51 @@ astro <- FindClusters(astro, resolution = 0.4)
 
 FeaturePlot(astro, 
             features = c("Aif1", "Tmem119", "Hexb", "P2ry12"), 
-            slot = "counts")
+            slot = "counts",
+            num_columns = 2)
+ggsave(paste0(plots, "astrocyte_microglial_features.png"),
+       units = "in", dpi = 600,
+       height = 8, width = 8)
 
 DimPlot_scCustom(astro, 
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
                                                           num_colors = 5),
                  pt.size = 3)
+ggsave(pate0(plots, "astrocyte_dimplot.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 VlnPlot_scCustom(astro, 
                  features = c("Aif1", "Tmem119", "Hexb", "P2ry12", "S100b"), 
                  slot = "data",
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
-                                                          num_colors = 5))
+                                                          num_colors = 5),
+                 num_columns = 3)
+ggsave(paste0(plots, "astrocyte_microglial_features_vln.png"),
+       units = "in", dpi = 600,
+       height = 8, width = 12)
 
 FeaturePlot(astro, 
             features = "marsh_microglia_id1", 
             cols = c("navy", "gold"))
+ggsave(paste0(plots, "astrocyte_microglia_id.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 VlnPlot_scCustom(astro, 
                  features = "marsh_microglia_id1",
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
                                                           num_colors = 5))
+ggsave(paste0(plots, "astrocyte_microglia_id_vln.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 astro.ave <- AverageExpression(astro, assays = "SCT", return.seurat = T)
 DoHeatmap(astro.ave, features = unlist(TopFeatures(astro[["pca"]], balanced = TRUE)), size = 3,
           draw.lines = FALSE)
+ggsave(paste0(plots, "astrocyte_marker_heatmap.png"),
+       units = "in", dpi = 600,
+       height = 10, width = 10)
 
 astro.remove <- WhichCells(astro, idents = c(3,4))
 #What % of cells were kept?
@@ -215,30 +294,50 @@ cns <- FindClusters(cns, resolution = 0.2)
 
 FeaturePlot(cns, 
             features = c("Aif1", "Tmem119", "Hexb", "P2ry12"), 
-            slot = "counts")
+            slot = "counts",
+            num_columns = 2)
+ggsave(paste0(plots, "cns_microglial_features.png"),
+       units = "in", dpi = 600,
+       height = 8, width = 8)
 
 DimPlot_scCustom(cns, 
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
                                                           num_colors = 11))
+ggsave(pate0(plots, "cns_dimplot.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 VlnPlot_scCustom(cns, 
                  features = c("Aif1", "Tmem119", "Hexb", "P2ry12"), 
                  slot = "counts",
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
-                                                          num_colors = 11))
+                                                          num_colors = 11),
+                 num_columns = 2)
+ggsave(paste0(plots, "cns_microglial_features_vln.png"),
+       units = "in", dpi = 600,
+       height = 8, width = 8)
 
 FeaturePlot(cns, 
             features = "marsh_microglia_id1", 
             cols = c("navy", "gold"))
+ggsave(paste0(plots, "cns_microglia_id.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 VlnPlot_scCustom(cns, 
                  features = "marsh_microglia_id1",
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
                                                           num_colors = 11))
+ggsave(paste0(plots, "cns_microglia_id_vln.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 cns.ave <- AverageExpression(cns, assays = "SCT", return.seurat = T)
 DoHeatmap(cns.ave, features = unlist(TopFeatures(cns[["pca"]], balanced = TRUE)), size = 3,
           draw.lines = FALSE)
+ggsave(paste0(plots, "cns_marker_heatmap.png"),
+       units = "in", dpi = 600,
+       height = 10, width = 10)
 
 cns.remove <- WhichCells(cns, idents = c(0, 4))
 #What % of cells were kept?
@@ -256,31 +355,51 @@ endo1 <- FindClusters(endo1, resolution = 0.4)
 
 FeaturePlot(endo1, 
             features = c("Aif1", "Tmem119", "Hexb", "P2ry12"), 
-            slot = "counts")
+            slot = "counts",
+            num_columns = 1)
+ggsave(paste0(plots, "vascular1_microglial_features.png"),
+       units = "in", dpi = 600,
+       height = 8, width = 8)
 
 DimPlot_scCustom(endo1, 
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
                                                           num_colors = 6),
                  pt.size = 3)
+ggsave(pate0(plots, "vascular1_dimplot.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 VlnPlot_scCustom(endo1, 
                  features = c("Aif1", "Tmem119", "Hexb", "P2ry12", "Cldn5", "Acta2"), 
                  slot = "counts",
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
-                                                          num_colors = 6))
+                                                          num_colors = 6),
+                 num_columns = 3)
+ggsave(paste0(plots, "vascular1_microglial_features_vln.png"),
+       units = "in", dpi = 600,
+       height = 8, width = 12)
 
 FeaturePlot(endo1, 
             features = "marsh_microglia_id1", 
             cols = c("navy", "gold"))
+ggsave(paste0(plots, "vascular1_microglia_id.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 VlnPlot_scCustom(endo1, 
                  features = "marsh_microglia_id1",
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
                                                           num_colors = 6))
+ggsave(paste0(plots, "vascular1_microglia_id_vln.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 endo1.ave <- AverageExpression(endo1, assays = "SCT", return.seurat = T)
 DoHeatmap(endo1.ave, features = unlist(TopFeatures(endo1[["pca"]], balanced = TRUE)), size = 3,
           draw.lines = FALSE)
+ggsave(paste0(plots, "vascular1_marker_heatmap.png"),
+       units = "in", dpi = 600,
+       height = 10, width = 10)
 
 endo1.remove <- WhichCells(endo1, idents = 5)
 #What % of cells were kept?
@@ -298,31 +417,51 @@ endo2 <- FindClusters(endo2, resolution = 0.8)
 
 FeaturePlot(endo2, 
             features = c("Aif1", "Tmem119", "Hexb", "P2ry12"), 
-            slot = "counts")
+            slot = "counts",
+            num_columns = 2)
+ggsave(paste0(plots, "vascular2_microglial_features.png"),
+       units = "in", dpi = 600,
+       height = 8, width = 8)
 
 DimPlot_scCustom(endo2, 
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
                                                           num_colors = 6),
                  pt.size = 3)
+ggsave(pate0(plots, "vascular2_dimplot.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 VlnPlot_scCustom(endo2, 
                  features = c("Aif1", "Tmem119", "Hexb", "P2ry12", "Icam1", "Pglyrp1"), 
                  slot = "counts",
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
-                                                          num_colors = 6))
+                                                          num_colors = 6),
+                 num_columns = 3)
+ggsave(paste0(plots, "vascular2_microglial_features_vln.png"),
+       units = "in", dpi = 600,
+       height = 8, width = 12)
 
 FeaturePlot(endo2, 
             features = "marsh_microglia_id1", 
             cols = c("navy", "gold"))
+ggsave(paste0(plots, "vascular2_microglia_id.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 VlnPlot_scCustom(endo2, 
                  features = "marsh_microglia_id1",
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
                                                           num_colors = 6))
+ggsave(paste0(plots, "vascular2_microglia_id_vln.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 endo2.ave <- AverageExpression(endo2, assays = "SCT", return.seurat = T)
 DoHeatmap(endo2.ave, features = unlist(TopFeatures(endo2[["pca"]], balanced = TRUE)), size = 3,
           draw.lines = FALSE)
+ggsave(paste0(plots, "vascular2_marker_heatmap.png"),
+       units = "in", dpi = 600,
+       height = 10, width = 10)
 
 endo2.remove <- WhichCells(endo2, idents = 5)
 #What % of cells were kept?
@@ -340,32 +479,52 @@ cp <- FindClusters(cp, resolution = 0.2)
 
 FeaturePlot(cp, 
             features = c("Aif1", "Tmem119", "Hexb", "P2ry12"), 
-            slot = "counts")
+            slot = "counts",
+            num_columns = 2)
+ggsave(paste0(plots, "choroid_microglial_features.png"),
+       units = "in", dpi = 600,
+       height = 8, width = 8)
 
 DimPlot_scCustom(cp, 
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
                                                           num_colors = 3),
                  pt.size = 3)
+ggsave(pate0(plots, "choroid_dimplot.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 VlnPlot_scCustom(cp, 
                  features = c("Aif1", "Tmem119", "Hexb", "P2ry12",
                               "Dcn", "Ttr", "Folr1", "Prlr"), 
                  slot = "counts",
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
-                                                          num_colors = 3))
+                                                          num_colors = 3),
+                 num_columns = 4)
+ggsave(paste0(plots, "choroid_microglial_features_vln.png"),
+       units = "in", dpi = 600,
+       height = 8, width = 16)
 
 FeaturePlot(cp, 
             features = "marsh_microglia_id1", 
             cols = c("navy", "gold"))
+ggsave(paste0(plots, "choroid_microglia_id.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 VlnPlot_scCustom(cp, 
                  features = "marsh_microglia_id1",
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
                                                           num_colors = 3))
+ggsave(paste0(plots, "choroid_microglia_id_vln.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 cp.ave <- AverageExpression(cp, assays = "SCT", return.seurat = T)
 DoHeatmap(cp.ave, features = unlist(TopFeatures(cp[["pca"]], balanced = TRUE)), size = 3,
           draw.lines = FALSE)
+ggsave(paste0(plots, "choroid_marker_heatmap.png"),
+       units = "in", dpi = 600,
+       height = 10, width = 10)
 
 cp.remove <- WhichCells(cp, idents = 2)
 #What % of cells were kept?
@@ -383,31 +542,50 @@ mono1 <- FindClusters(mono1, resolution = 0.4)
 
 FeaturePlot(mono1, 
             features = c("Hexb", "P2ry12", "Sall1", "Tmem119"), 
-            slot = "counts")
+            slot = "counts",
+            num_columns = 2)
+ggsave(paste0(plots, "monomacs1_microglial_features.png"),
+       units = "in", dpi = 600,
+       height = 8, width = 8)
 
 DimPlot_scCustom(mono1, 
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
                                                           num_colors = 10),
                  pt.size = 2)
+ggsave(pate0(plots, "monomacs1_dimplot.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 VlnPlot_scCustom(mono1, 
                  features = c("Hexb", "P2ry12", "Sall1", "Tmem119"), 
                  slot = "counts",
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
                                                           num_colors = 10))
+ggsave(paste0(plots, "monomacs1_microglial_features_vln.png"),
+       units = "in", dpi = 600,
+       height = 8, width = 8)
 
 FeaturePlot(mono1, 
             features = "marsh_microglia_id1", 
             cols = c("navy", "gold"))
+ggsave(paste0(plots, "monomacs1_microglia_id.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 VlnPlot_scCustom(mono1, 
                  features = "marsh_microglia_id1",
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
                                                           num_colors = 10))
+ggsave(paste0(plots, "monomacs1_microglia_id_vln.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 mono1.ave <- AverageExpression(mono1, assays = "SCT", return.seurat = T)
 DoHeatmap(mono1.ave, features = unlist(TopFeatures(mono1[["pca"]], balanced = TRUE)), size = 3,
           draw.lines = FALSE)
+ggsave(paste0(plots, "monomacs1_marker_heatmap.png"),
+       units = "in", dpi = 600,
+       height = 10, width = 10)
 
 mono1.remove <- WhichCells(mono1, idents = 8)
 #What % of cells were kept?
@@ -425,30 +603,49 @@ mono2 <- FindClusters(mono2, resolution = 0.2)
 
 FeaturePlot(mono2, 
             features = c("Hexb", "P2ry12", "Sall1", "Tmem119"), 
-            slot = "counts")
+            slot = "counts",
+            num_columns = 2)
+ggsave(paste0(plots, "monomacs2_microglial_features.png"),
+       units = "in", dpi = 600,
+       height = 8, width = 8)
 
 DimPlot_scCustom(mono2, 
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
                                                           num_colors = 5))
+ggsave(pate0(plots, "monomacs2_dimplot.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 VlnPlot_scCustom(mono2, 
                  features = c("Hexb", "P2ry12", "Sall1", "Tmem119"), 
                  slot = "counts",
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
                                                           num_colors = 5))
+ggsave(paste0(plots, "monomacs2_microglial_features_vln.png"),
+       units = "in", dpi = 600,
+       height = 8, width = 8)
 
 FeaturePlot(mono2, 
             features = "marsh_microglia_id1", 
             cols = c("navy", "gold"))
+ggsave(paste0(plots, "monomacs2_microglia_id.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 VlnPlot_scCustom(mono2, 
                  features = "marsh_microglia_id1",
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
                                                           num_colors = 5))
+ggsave(paste0(plots, "monomacs2_microglia_id_vln.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 mono2.ave <- AverageExpression(mono2, assays = "SCT", return.seurat = T)
 DoHeatmap(mono2.ave, features = unlist(TopFeatures(mono2[["pca"]], balanced = TRUE)), size = 3,
           draw.lines = FALSE)
+ggsave(paste0(plots, "monomacs2_marker_heatmap.png"),
+       units = "in", dpi = 600,
+       height = 10, width = 10)
 
 mono2.remove <- WhichCells(mono2, idents = 3)
 #What % of cells were kept?
@@ -466,30 +663,49 @@ mono3 <- FindClusters(mono3, resolution = 0.4)
 
 FeaturePlot(mono3, 
             features = c("Hexb", "P2ry12", "Sall1", "Tmem119"), 
-            slot = "counts")
+            slot = "counts",
+            num_columns = 2)
+ggsave(paste0(plots, "monomacs3_microglial_features.png"),
+       units = "in", dpi = 600,
+       height = 8, width = 8)
 
 DimPlot_scCustom(mono3, 
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
                                                           num_colors = 6))
+ggsave(pate0(plots, "monomacs3_dimplot.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 VlnPlot_scCustom(mono3, 
                  features = c("Hexb", "P2ry12", "Sall1", "Tmem119"), 
                  slot = "counts",
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
                                                           num_colors = 6))
+ggsave(paste0(plots, "monomacs3_microglial_features_vln.png"),
+       units = "in", dpi = 600,
+       height = 8, width = 8)
 
 FeaturePlot(mono3, 
             features = "marsh_microglia_id1", 
             cols = c("navy", "gold"))
+ggsave(paste0(plots, "monomacs3_microglia_id.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 VlnPlot_scCustom(mono3, 
                  features = "marsh_microglia_id1",
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
                                                           num_colors = 6))
+ggsave(paste0(plots, "monomacs3_microglia_id_vln.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 mono3.ave <- AverageExpression(mono3, assays = "SCT", return.seurat = T)
 DoHeatmap(mono3.ave, features = unlist(TopFeatures(mono3[["pca"]], balanced = TRUE)), size = 3,
           draw.lines = FALSE)
+ggsave(paste0(plots, "monomacs3_marker_heatmap.png"),
+       units = "in", dpi = 600,
+       height = 10, width = 10)
 
 mono3.remove <- WhichCells(mono3, idents = 5)
 #What % of cells were kept?
@@ -506,30 +722,49 @@ mono4 <- FindClusters(mono4, resolution = 0.2)
 
 FeaturePlot(mono4, 
             features = c("Hexb", "P2ry12", "Sall1", "Tmem119"), 
-            slot = "counts")
+            slot = "counts",
+            num_columns = 2)
+ggsave(paste0(plots, "monomacs4_microglial_features.png"),
+       units = "in", dpi = 600,
+       height = 8, width = 8)
 
 DimPlot_scCustom(mono4, 
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
                                                           num_colors = 6))
+ggsave(pate0(plots, "monomacs4_dimplot.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 VlnPlot_scCustom(mono4, 
                  features = c("Hexb", "P2ry12", "Sall1", "Tmem119"), 
                  slot = "counts",
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
                                                           num_colors = 6))
+ggsave(paste0(plots, "monomacs4_microglial_features_vln.png"),
+       units = "in", dpi = 600,
+       height = 8, width = 8)
 
 FeaturePlot(mono4, 
             features = "marsh_microglia_id1", 
             cols = c("navy", "gold"))
+ggsave(paste0(plots, "monomacs4_microglia_id.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 VlnPlot_scCustom(mono4, 
                  features = "marsh_microglia_id1",
                  colors_use = DiscretePalette_scCustomize(palette = "ditto_seq",
                                                           num_colors = 6))
+ggsave(paste0(plots, "monomacs4_microglia_id_vln.png"),
+       units = "in", dpi = 600,
+       height = 4, width = 4)
 
 mono4.ave <- AverageExpression(mono4, assays = "SCT", return.seurat = T)
 DoHeatmap(mono4.ave, features = unlist(TopFeatures(mono4[["pca"]], balanced = TRUE)), size = 3,
           draw.lines = FALSE)
+ggsave(paste0(plots, "monomacs4_marker_heatmap.png"),
+       units = "in", dpi = 600,
+       height = 10, width = 10)
 
 mono4.remove <- WhichCells(mono4, idents = 4)
 #What % of cells were kept?
