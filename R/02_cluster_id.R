@@ -169,6 +169,22 @@ all_markers <- FindAllMarkers(obj)
 #Save objects and markers as needed ----
 saveRDS(all_markers, "data_objects/cluster_id_1_all_markers.RDS")
 write.xlsx(all_markers, paste0(stats, "cluster_id_1_all_markers.xlsx"))
-saveRDS(obj, "data_objects/01_batch_integrated.RDS")
 
 #Add annotations ----
+cluster_id <- c("Microglia1", "Microglia2", "Microglia3", "Microglia4", "Microglia5",
+                "Monocyte/Macrophage1", "Microglia6", "Monocyte/Macrophage2", "Monocyte/Macrophage3", 
+                "Neutrophil", "Monocyte/Macrophage4", "B-cell", "NK/T-cell",
+                "Endothelial/Vascular1", "Choroid plexus", "Meninges/CNS", "Astrocyte", "Endothelial/Vascular2",
+                "Microglia7")
+
+names(cluster_id) <- levels(obj)
+obj <- RenameIdents(obj, cluster_id)
+DimPlot_scCustom(obj, 
+                 label = T, 
+                 label.box = F,
+                 repel = T) +
+  NoLegend()
+ggsave(paste0(plots, "annotated_UMAP.png"), units = "in",
+       dpi = 600, height = 10, width = 10)
+
+saveRDS(obj, "data_objects/01_batch_integrated.RDS")
