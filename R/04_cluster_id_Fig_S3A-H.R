@@ -1,3 +1,8 @@
+#Now that microglial "contamination" was filtered out, we will re-annotate our
+#clusters. This should be straightforward. This script will look a lot like 
+#script 02 - the strategy is the same. After annotation, some plots were made 
+#for Supp. Fig. 3.
+
 library(Seurat)
 library(scCustomize)
 library(dittoSeq)
