@@ -187,4 +187,4 @@ DimPlot_scCustom(obj,
 ggsave(paste0(plots, "annotated_UMAP.png"), units = "in",
        dpi = 600, height = 10, width = 10)
 
-saveRDS(obj, "data_objects/01_batch_integrated.RDS")
+saveRDS(obj, "data_objects/02_annotated.RDS")
