@@ -14,7 +14,7 @@ npcs <- 30
 resolutions <- c(0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 2, 4, 6, 8, 12)
 assay <- "SCT"
 reduction <- "pca"
-results_path <- "chooseR/bcells1/"
+results_path <- "chooseR/bcells/"
 
 # Run pipeline
 for (res in resolutions) {
