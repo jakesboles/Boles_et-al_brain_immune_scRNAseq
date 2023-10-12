@@ -264,3 +264,6 @@ DimPlot_scCustom(obj, label = F,
 ggsave(paste0(plots, "Fig_S3H.png"),
        units = "in", dpi = 600,
        height = 5, width = 6)
+
+saveRDS(obj,
+        file = "data_objects/04_coarse_annotated.RDS")
