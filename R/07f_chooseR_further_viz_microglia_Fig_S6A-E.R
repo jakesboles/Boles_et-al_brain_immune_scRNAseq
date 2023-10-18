@@ -5,6 +5,7 @@ reduction <- "pca"
 assay <- "SCT"
 choice <- 0.4
 results_path <- "chooseR/microglia/"
+plots <- "chooseR/microglia/"
 
 # Load in the object containing the clustered results
 obj <- readRDS(paste0(results_path, "clustered_data.rds"))
@@ -110,8 +111,6 @@ theme <- theme(axis.text = element_blank(),   #thematic elements for plots
                axis.line = element_line(arrow = arrow(angle = 15, 
                                                       length = unit(0.5, "cm"), 
                                                       type = "closed")))
-
-plots <- "chooseR/microglia/"
 
 #Labeled DimPlot in downsampled data
 downsamp <- obj
