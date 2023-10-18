@@ -5,7 +5,6 @@ reduction <- "pca"
 assay <- "SCT"
 choice <- 0.4
 results_path <- "chooseR/microglia/"
-plots <- "chooseR/microglia/"
 
 # Load in the object containing the clustered results
 obj <- readRDS(paste0(results_path, "clustered_data.rds"))
@@ -60,7 +59,7 @@ plot
 
 ggsave(
   plot = plot,
-  filename = paste0(plots, "Fig_S6C.png"),
+  filename = paste0(results_path, "Fig_S6C.png"),
   dpi = 300,
   height = 3.5,
   width = 3.5,
@@ -121,7 +120,7 @@ DimPlot_scCustom(downsamp,
                  colors_use = ColorBlind_Pal(),
                  label.size = 8) +
   theme
-ggsave(paste0(plots, "Fig_S6A.png"),
+ggsave(paste0(results_path, "Fig_S6A.png"),
        units = "in", dpi = 600,
        height = 5, width = 5.5)
 
@@ -137,7 +136,7 @@ DimPlot_scCustom(obj, label = T,
                  label.size = 8,
                  repel = T) +
   theme
-ggsave(paste0(plots, "Fig_S6E.png"),
+ggsave(paste0(results_path, "Fig_S6E.png"),
        units = "in", dpi = 600,
        height = 5, width = 5.5)
 
@@ -188,7 +187,7 @@ sampled_meta %>%
     legend.title = element_text(size = 8, hjust = 0),
     plot.title = element_text(hjust = 0.5, size = 12, face = "bold")
   )
-ggsave(filename = paste0(plots, "Fig_S6D.png"),
+ggsave(filename = paste0(results_path, "Fig_S6D.png"),
        dpi = 300,
        height = 2.5,
        width = 3.5,
