@@ -8,7 +8,10 @@ results_path <- "chooseR/cd45neg/"
 
 # Load in the object containing the clustered results
 obj <- readRDS(paste0(results_path, "clustered_data.rds"))
-Idents(obj) <- obj@meta.data$pca.SCT_res.0.6 #UPDATE THIS
+Idents(obj) <- obj@meta.data$pca.SCT_res.0.6
+
+levels(obj)
+levels(obj) <- as.character(0:16)
 
 DimPlot_scCustom(obj, label = T,
                  pt.size = 1,
