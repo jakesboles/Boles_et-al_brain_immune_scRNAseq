@@ -35,3 +35,47 @@ DimPlot_scCustom(obj,
 ggsave(paste0(plots, "Fig_S3N.png"),
        units = "in", dpi = 600,
        height = 3, width = 3)
+
+#Generate markers file ----
+obj <- FindClusters(obj,
+                    resolution = 0.6)
+
+markers <- FindAllMarkers(obj, only.pos = F)
+
+write.csv(markers,
+          file = "tabular_data/t_nk_markers.csv")
+
+#Canonical cell markers FeaturePlots based on markers file  ----
+theme <- theme(axis.text = element_blank(),
+               axis.ticks = element_blank(),
+               axis.line = element_line(arrow = arrow(angle = 15, 
+                                                      length = unit(0.5, "cm"), 
+                                                      type = "closed")))
+fplot <- function(gene, filename){
+  p <- FeaturePlot_scCustom(obj,
+                            features = gene,
+                            colors_use = viridis_light_high,
+                            na_cutoff = 1) + 
+    theme(
+      plot.title = element_text(face = "bold.italic")
+    ) +
+    theme
+  
+  ggsave(p,
+         filename = paste0(plots, filename, ".png"),
+         units = "in", dpi = 600,
+         height = 4, width = 4.5)
+}
+
+fplot("Cd3e", "Fig_S9D")
+fplot("Cd8b1", "Fig_S9E")
+fplot("Gzma", "Fig_S9F")
+fplot("Klrb1c", "Fig_S9G")
+fplot("Trdc", "Fig_S9H")
+fplot("Trgc1", "Fig_S9I")
+fplot("Marco", "Fig_S9J")
+fplot("Hba-a1", "Fig_S9K")
+fplot("Cebpa", "Fig_S9L")
+fplot("Mcpt4", "Fig_S9M")
+fplot("Plac8", "Fig_S9N")
+fplot("Calca", "Fig_S9O")
