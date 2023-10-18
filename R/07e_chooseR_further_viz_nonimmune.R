@@ -10,6 +10,15 @@ results_path <- "chooseR/cd45neg/"
 obj <- readRDS(paste0(results_path, "clustered_data.rds"))
 Idents(obj) <- obj@meta.data$pca.SCT_res.0.6 #UPDATE THIS
 
+DimPlot_scCustom(obj, label = T,
+                 pt.size = 1,
+                 label.size = 6) + 
+  NoLegend() +
+  theme
+ggsave(paste0(results_path, "Fig_S5A.png"),
+       units = "in", dpi = 600,
+       height = 5, width = 5.5)
+
 # First is a cluster average co-clustering heatmap
 # Read the data
 grp <- readRDS(paste0(results_path, "frequency_grouped_", choice, ".rds"))
@@ -59,7 +68,7 @@ plot
 
 ggsave(
   plot = plot,
-  filename = paste0(results_path, "coclustering_heatmap_", choice, ".png"),
+  filename = paste0(results_path, "Fig_S5C.png"),
   dpi = 300,
   height = 3.5,
   width = 3.5,
@@ -97,7 +106,7 @@ plot
 
 ggsave(
   plot = plot,
-  filename = paste0(results_path, choice, "_silhouette_umap.png"),
+  filename = paste0(results_path, "Fig_S5B.png"),
   dpi = 300,
   height = 5,
   width = 5.5,
