@@ -6,9 +6,15 @@ assay <- "SCT"
 choice <- 0.4
 results_path <- "chooseR/microglia/"
 
+theme <- theme(axis.text = element_blank(),
+               axis.ticks = element_blank(),
+               axis.line = element_line(arrow = arrow(angle = 15, 
+                                                      length = unit(0.5, "cm"), 
+                                                      type = "closed")))
+
 # Load in the object containing the clustered results
 obj <- readRDS(paste0(results_path, "clustered_data.rds"))
-Idents(obj) <- obj@meta.data$pca.SCT_res.0.4#UPDATE THIS
+Idents(obj) <- obj@meta.data$pca.SCT_res.0.4
 
 # First is a cluster average co-clustering heatmap
 # Read the data
