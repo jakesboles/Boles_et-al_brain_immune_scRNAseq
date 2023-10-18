@@ -1,13 +1,6 @@
 library(Seurat)
 library(tidyverse)
 
-# Currently, running ggsave with Rscript produces spurious pdfs.
-# To prevent this, all plots are caught and saved directly
-# Call print(plot) at any point to see your plot!
-
-# Define sommon common variables
-# choice is the res elected by the pipeline in examples/1_seurat_pipeline.R
-# Be sure to change your path as necessary!
 reduction <- "pca"
 assay <- "SCT"
 choice <- 0.4
