@@ -73,3 +73,5 @@ fplot("Ms4a1", "Fig_S4E")
 fplot("Ighm", "Fig_S4F")
 fplot("Cd3e", "Fig_S4G")
 fplot("Nkg7", "Fig_S4H")
+
+#Annotating and saving annotated object ----
