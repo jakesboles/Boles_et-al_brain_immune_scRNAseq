@@ -37,3 +37,49 @@ DimPlot_scCustom(obj,
 ggsave(paste0(plots, "Fig_S3L.png"),
        units = "in", dpi = 600,
        height = 3, width = 3)
+
+#Generate markers file ----
+obj <- FindClusters(obj, 
+                    resolution = 0.8) #resolution comes from chooseR
+
+markers <- FindAllMarkers(obj, only.pos = F)
+
+write.csv(markers,
+          file = "tabular_data/mono-macs_markers.csv")
+
+#Canonical cell markers FeaturePlots based on markers file  ----
+theme <- theme(axis.text = element_blank(),
+               axis.ticks = element_blank(),
+               axis.line = element_line(arrow = arrow(angle = 15, 
+                                                      length = unit(0.5, "cm"), 
+                                                      type = "closed")))
+fplot <- function(gene, filename){
+  p <- FeaturePlot_scCustom(obj,
+                            features = gene,
+                            colors_use = viridis_light_high,
+                            na_cutoff = 1) + 
+    theme(
+      plot.title = element_text(face = "bold.italic")
+    ) +
+    theme
+  
+  ggsave(p,
+         filename = paste0(plots, filename, ".png"),
+         units = "in", dpi = 600,
+         height = 4, width = 4.5)
+}
+
+fplot("Mrc1", "Fig_S7D")
+fplot("Cd163", "Fig_S7E")
+fplot("Ms4a7", "Fig_S7F")
+fplot("Itgax", "Fig_S7G")
+fplot("Cd83", "Fig_S7H")
+fplot("Cd86", "Fig_S7I")
+fplot("Ccr2", "Fig_S7J")
+fplot("Ly6c2", "Fig_S7K")
+fplot("Arg1", "Fig_S7L")
+fplot("Igkc", "Fig_S7M")
+fplot("Vpreb3", "Fig_S7N")
+fplot("Hba-a1", "Fig_S7O")
+
+#Annotating and saving annotated object ----
