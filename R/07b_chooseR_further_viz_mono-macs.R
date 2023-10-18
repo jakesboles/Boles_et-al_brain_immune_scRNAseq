@@ -6,9 +6,27 @@ assay <- "SCT"
 choice <- 0.8
 results_path <- "chooseR/monomacs/"
 
+theme <- theme(axis.text = element_blank(),
+               axis.ticks = element_blank(),
+               axis.line = element_line(arrow = arrow(angle = 15, 
+                                                      length = unit(0.5, "cm"), 
+                                                      type = "closed")))
+
 # Load in the object containing the clustered results
 obj <- readRDS(paste0(results_path, "clustered_data.rds"))
-Idents(obj) <- obj@meta.data$pca.SCT_res.0.8 #UPDATE THIS
+Idents(obj) <- obj@meta.data$pca.SCT_res.0.8 
+
+levels(obj)
+levels(obj) <- as.character(0:17)
+
+DimPlot_scCustom(obj, label = T,
+                 pt.size = 1,
+                 label.size = 6) +
+  NoLegend() +
+  theme
+ggsave(paste0(results_path, "Fig_S7A.png"),
+       units = "in", dpi = 600,
+       height = 5, width = 5.5)
 
 # First is a cluster average co-clustering heatmap
 # Read the data
@@ -60,7 +78,7 @@ plot
 
 ggsave(
   plot = plot,
-  filename = paste0(results_path, "coclustering_heatmap_", choice, ".png"),
+  filename = paste0(results_path, "Fig_S7C.png"),
   dpi = 300,
   height = 3.5,
   width = 3.5,
@@ -98,7 +116,7 @@ plot
 
 ggsave(
   plot = plot,
-  filename = paste0(results_path, choice, "_silhouette_umap.png"),
+  filename = paste0(results_path, "Fig_S7B.png"),
   dpi = 300,
   height = 5,
   width = 5.5,
