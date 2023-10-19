@@ -99,3 +99,7 @@ DimPlot_scCustom(obj, label = F,
 ggsave(paste0(plots, "Fig_S5N.png"),
        units = "in", dpi = 600,
        height = 5, width = 6.5)
+
+#Save object ----
+saveRDS(obj, 
+        file = "data_objects/06_annotated_cd45neg.RDS")

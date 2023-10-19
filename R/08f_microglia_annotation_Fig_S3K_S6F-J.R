@@ -81,3 +81,5 @@ fplot("Tmem119", "Fig_S6J")
 #All clusters are microglia, so no additional annotation needed
 
 #Save object ----
+saveRDS(obj, 
+        file = "data_objects/06_annotated_microglia.RDS")
