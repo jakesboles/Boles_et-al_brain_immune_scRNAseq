@@ -75,3 +75,22 @@ fplot("Cd3e", "Fig_S4G")
 fplot("Nkg7", "Fig_S4H")
 
 #Annotating and saving annotated object ----
+levels(obj) <- as.character(0:5)
+
+ids <- c("B-cells", "B-cells", "B-cells",
+         "B-cells", "B-cells", "Doublets")
+
+levels(obj)
+levels <- as.character(c(0:5))
+names(ids) <- levels
+
+obj <- RenameIdents(obj, ids)
+
+levels(obj)
+
+DimPlot_scCustom(obj, label = F,
+                 pt.size = 2) +
+  theme
+ggsave(paste0(plots, "Fig_S4I.png"),
+       units = "in", dpi = 600,
+       height = 5, width = 6.5)

@@ -79,3 +79,25 @@ fplot("Cebpa", "Fig_S9L")
 fplot("Mcpt4", "Fig_S9M")
 fplot("Plac8", "Fig_S9N")
 fplot("Calca", "Fig_S9O")
+
+#Annotating and saving annotated object ----
+levels(obj) <- as.character(0:11)
+
+ids <- c("αβ T-cells", "αβ T-cells", "αβ T-cells", "Natural killer cells",
+         "Natural killer cells", "Stem cells", "γδ T-cells", "Basophils", "Macrophages",
+         "Stem cells", "Mast cells", "Erythrocytes")
+
+levels(obj)
+levels <- as.character(c(0:11))
+names(ids) <- levels
+
+obj <- RenameIdents(obj, ids)
+levels(obj)
+
+DimPlot_scCustom(obj, label = F,
+                 pt.size = 2,
+                 colors_use = ColorBlind_Pal()) +
+  theme
+ggsave(paste0(plots, "Fig_S9P.png"),
+       units = "in", dpi = 600,
+       height = 5, width = 6.5)

@@ -74,3 +74,15 @@ fplot("Ngp", "Fig_S8E")
 fplot("S100a8", "Fig_S8F")
 fplot("S100a9", "Fig_S8G")
 fplot("P2ry12", "Fig_S8H")
+
+#Annotate object ----
+ids <- c(rep("Neutrophils", 8), "Doublets", "Neutrophils")
+names(ids) <- as.character(c(0:9))
+
+obj <- RenameIdents(obj, ids)
+DimPlot_scCustom(obj, label = F,
+                 pt.size = 1) +
+  theme
+ggsave(paste0(plots, "Fig_S8I.png"),
+       units = "in", dpi = 600,
+       height = 5, width = 6.5)

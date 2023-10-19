@@ -83,3 +83,24 @@ fplot("Vpreb3", "Fig_S7N")
 fplot("Hba-a1", "Fig_S7O")
 
 #Annotating and saving annotated object ----
+levels(obj) <- as.character(0:17)
+
+ids <- c("Monocytes", "Macrophages", "Macrophages", "Macrophages", "Monocytes",
+         "Monocytes", "Macrophages", "Dendritic cells", "Macrophages", "Macrophages",
+         "Monocytes", "Dendritic cells", "Dendritic cells", "Monocytes", "Monocytes",
+         "Plasma cells", "Monocytes", "Erythrocytes")
+
+levels(obj)
+levels <- as.character(c(0:17))
+names(ids) <- levels
+
+obj <- RenameIdents(obj, ids)
+levels(obj)
+
+DimPlot_scCustom(obj, label = F,
+                 pt.size = 2,
+                 colors_use = ColorBlind_Pal()) +
+  theme
+ggsave(paste0(plots, "Fig_S7P.png"),
+       units = "in", dpi = 600,
+       height = 5, width = 6.5)
