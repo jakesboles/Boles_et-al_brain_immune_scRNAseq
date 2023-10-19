@@ -11,6 +11,7 @@ Jake Sondag Boles<sup>1</sup>, Oihane Uriarte Huarte, & Malú Gámez Tansey, 202
 <sup><sup>1</sup> Analysis lead and contact (jake.boles@ufl.edu)</sup>
 
 ## Original single-cell RNA sequencing data:
+Our data can be accessed via the NCBI GEO ([GSE245309](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?&acc=GSE245309)).
 
 ## Code:
 This project was run in R v4.2-4.3. This repository will load version-controlled packages using the `renv` package. Certain key analyses, including normalization and integration of data, were done through the University of Florida's HiPerGator 3.0 cluster with up to 24 CPUs and 185GB RAM. If you intend to run this analysis yourself, I would recommend loading this repository onto your institution's high-performance cluster.
