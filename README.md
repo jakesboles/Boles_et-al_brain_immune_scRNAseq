@@ -36,9 +36,14 @@ Particle-templated instant partition sequencing (PIPseq) is a new instrument- an
 ### Seurat:
 `Seurat` (version 4) was the primary tool used to handle single-cell RNA sequencing data in this study in `R`. Cell calling and quality control was done principally in `Seurat` on the raw output of PIPseeker, as shown in `00_prep_project_and_read_data.R`. For further reading, please see their [*Cell* paper](https://www.sciencedirect.com/science/article/pii/S0092867421005833?via%3Dihub) describing this version and its uses as well as their earlier publications, and their [user manual/tutorials](https://satijalab.org/seurat/).
 ### The chooseR clustering procedure:
+In an attempt to cluster our cells robustly (i.e., appropriately separate transcriptionally distinct cells while avoiding over-clustering) in what we predicted would be a richly diverse dataset, we employed the `chooseR` pipeline. Please see the [*BMC Bioinformatics* manuscript](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-021-03957-4) describing the method and the accompanying [GitHub repository](https://github.com/rbpatt2019/chooseR). 
+
+NOTE: I did **not** use their `renv`. As such, there were a few tweaks I made to the scripts to ensure that computational steps would proceed without errors and plots would be created to my liking. I've included my own versions of these scripts in the `chooseR_helpers` folder and the `06` and `07` scripts of this repository. 
 ### The cross entropy test for differences in dimensionally-reduced cell embeddings:
 ### scCustomize: 
 ### Artifactual gene expression modules:
 ### Psuedo-bulked differential expression with DESeq2:
 ### Pseudo-bulked gene set enrichment analyses with clusterProfiler:
 ### Curated lists of genes that describe the heritability of Alzheimer's and Parkinson's diseases:
+### CellChat:
+### MultiNicheNetR:
