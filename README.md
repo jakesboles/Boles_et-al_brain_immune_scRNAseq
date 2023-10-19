@@ -31,6 +31,7 @@ usethis::use_course(
 
 ## Relevant external resources:
 ### PIPseq:
+Particle-templated instant partition sequencing (PIPseq) is a new instrument- and microfluidics-free single-cell genomics platform from [Fluent BioSciences](https://www.fluentbio.com/). Please refer to their [*Nature Biotechnology* paper](https://www.nature.com/articles/s41587-023-01685-z) for a full look at the genomics technique and their earlier [*Analytical Chemistry* paper](https://pubs.acs.org/doi/10.1021/acs.analchem.8b01759) for a more in-depth look at the chemistry underlying particle-templated emulsification. 
 ### PIPseeker:
 ### Seurat:
 ### The chooseR clustering procedure:
