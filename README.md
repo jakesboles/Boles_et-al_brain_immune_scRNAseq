@@ -30,3 +30,13 @@ usethis::use_course(
 ```
 
 ## Relevant external resources:
+### PIPseq:
+### PIPseeker:
+### Seurat:
+### The chooseR clustering procedure:
+### The cross entropy test for differences in dimensionally-reduced cell embeddings:
+### scCustomize: 
+### Artifactual gene expression modules:
+### Psuedo-bulked differential expression with DESeq2:
+### Pseudo-bulked gene set enrichment analyses with clusterProfiler:
+### Curated lists of genes that describe the heritability of Alzheimer's and Parkinson's diseases:
