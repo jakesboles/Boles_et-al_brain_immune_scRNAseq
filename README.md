@@ -34,6 +34,7 @@ usethis::use_course(
 Particle-templated instant partition sequencing (PIPseq) is a new instrument- and microfluidics-free single-cell genomics platform from [Fluent BioSciences](https://www.fluentbio.com/). Please refer to their [*Nature Biotechnology* paper](https://www.nature.com/articles/s41587-023-01685-z) for a full look at the genomics technique and their earlier [*Analytical Chemistry* paper](https://pubs.acs.org/doi/10.1021/acs.analchem.8b01759) for a more in-depth look at the chemistry underlying particle-templated emulsification. 
 ### PIPseeker:
 ### Seurat:
+`Seurat` (version 4) was the primary tool used to handle single-cell RNA sequencing data in this study in `R`. Cell calling and quality control was done principally in `Seurat` on the raw output of PIPseeker, as shown in `00_prep_project_and_read_data.R`. For further reading, please see their [*Cell* paper](https://www.sciencedirect.com/science/article/pii/S0092867421005833?via%3Dihub) describing this version and its uses as well as their earlier publications, and their [user manual/tutorials](https://satijalab.org/seurat/).
 ### The chooseR clustering procedure:
 ### The cross entropy test for differences in dimensionally-reduced cell embeddings:
 ### scCustomize: 
