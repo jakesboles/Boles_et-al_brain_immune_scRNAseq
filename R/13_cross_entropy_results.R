@@ -9,7 +9,7 @@ classes <- c("blymph", "cd45neg", "dendritic_cells", "granulocytes",
 tbl <- list()
 
 for (i in seq_along(classes)){
-  tbl[[i]] <- read.table(paste0("09_cross_entropy_test/03_tsne_diff_2/", classes[i], "/umap_ce_diff_result_group.txt"),
+  tbl[[i]] <- read.table(paste0("cross_entropy_test/02_tsne_diff/", classes[i], "/umap_ce_diff_result_group.txt"),
                          sep = ",", skip = 6, nrows = 1)
 }
 
