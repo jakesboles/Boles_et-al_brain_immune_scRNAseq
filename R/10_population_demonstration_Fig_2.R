@@ -11,7 +11,8 @@ library(ggh4x)
 
 obj <- readRDS("data_objects/07_annotated_object.RDS")
 
-plots <- "plots/Fig_2"
+dir.create("plots/Fig_2")
+plots <- "plots/Fig_2/"
 
 obj@active.ident <- factor(obj@active.ident,
                            levels = sort(levels(obj))) 
