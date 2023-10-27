@@ -58,6 +58,8 @@ intg1 <- RunUMAP(intg1, reduction = "pca", dims = 1:30, verbose = F) %>%
 
 Idents(intg1) <- "cell_type"
 
+intg1 <- PrepSCTFindMarkers(intg1)
+
 saveRDS(intg1, file = "data_objects/09_immune_object.RDS")
 
 message("~~~~~~~~~~~~~~~~~~~~Re-integrate microglia since artifacts were removed~~~~~~~~~~~~~~~~~~~~")
@@ -77,6 +79,8 @@ microglia <- RunPCA(microglia, npcs = 100) %>%
   RunUMAP(reduction = "pca", dims = 1:30) %>%
   FindNeighbors(reduction = "pca", dims = 1:30) %>%
   FindClusters(resolution = 0.2)
+
+microglia <- PrepSCTFindMarkers(microglia)
 
 saveRDS(microglia, file = "data_objects/08_microglia_clean.RDS")
 
@@ -98,6 +102,8 @@ mac <- RunPCA(mac, npcs = 100) %>%
   FindNeighbors(reduction = "pca", dims = 1:30) %>%
   FindClusters(resolution = 0.2)
 
+mac <- PrepSCTFindMarkers(mac)
+
 saveRDS(mac, file = "data_objects/08_macrophages_clean.RDS")
 
 message("~~~~~~~~~~~~~~~~~~~~Re-integrate granulocytes since artifacts were removed~~~~~~~~~~~~~~~~~~~~")
@@ -118,6 +124,8 @@ gran <- RunPCA(gran, npcs = 100) %>%
   FindNeighbors(reduction = "pca", dims = 1:30) %>%
   FindClusters(resolution = 0.2)
 
+gran <- PrepSCTFindMarkers(gran)
+
 saveRDS(gran, file = "data_objects/08_granulocytes_clean.RDS")
 
 message("~~~~~~~~~~~~~~~~~~~~Re-integrate monocytes since artifacts were removed~~~~~~~~~~~~~~~~~~~~")
@@ -137,5 +145,7 @@ monocytes <- RunPCA(monocytes, npcs = 100) %>%
   RunUMAP(reduction = "pca", dims = 1:30) %>%
   FindNeighbors(reduction = "pca", dims = 1:30) %>%
   FindClusters(resolution = 0.2)
+
+monocytes <- PrepSCTFindMarkers(monocytes)
 
 saveRDS(monocytes, file = "data_objects/08_monocytes_clean.RDS")
