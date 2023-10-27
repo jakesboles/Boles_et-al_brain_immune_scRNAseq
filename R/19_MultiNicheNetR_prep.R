@@ -6,21 +6,17 @@ library(tidyverse)
 
 obj <- readRDS("data_objects/09_immune_object.RDS")
 
-#lr_network <- readRDS("lr_network_mouse_21122021.rds")
-lr_network <- readRDS("04_data_objects/07_multinichenetr/lr_network_mouse_21122021.rds")
-lr_network = lr_network %>% 
+#Load NicheNet database
+lr_network <- readRDS(url("https://zenodo.org/record/7074291/files/lr_network_mouse_21122021.rds"))
+lr_network <- lr_network %>% 
   dplyr::rename(ligand = from, receptor = to) %>% 
   distinct(ligand, receptor) %>% 
   mutate(ligand = make.names(ligand), receptor = make.names(receptor))
-colnames(lr_network) = colnames(lr_network) %>% 
-  make.names()
-rownames(lr_network) = rownames(lr_network) %>% 
-  make.names()
 
-ligand_target_matrix <- readRDS("04_data_objects/07_multinichenetr/ligand_target_matrix_nsga2r_final_mouse.rds")
-colnames(ligand_target_matrix) = colnames(ligand_target_matrix) %>% 
+ligand_target_matrix <- readRDS(url("https://zenodo.org/record/7074291/files/ligand_target_matrix_nsga2r_final_mouse.rds"))
+colnames(ligand_target_matrix) <- colnames(ligand_target_matrix) %>% 
   make.names()
-rownames(ligand_target_matrix) = rownames(ligand_target_matrix) %>% 
+rownames(ligand_target_matrix) <- rownames(ligand_target_matrix) %>% 
   make.names()
 
 obj$cell_type <- make.names(obj$cell_type)
