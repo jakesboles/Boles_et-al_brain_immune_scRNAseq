@@ -45,5 +45,6 @@ NOTE: I did **not** use their `renv`. As such, there were a few tweaks I made to
 ### Psuedo-bulked differential expression with DESeq2:
 ### Pseudo-bulked gene set enrichment analyses with clusterProfiler:
 ### Curated lists of genes that describe the heritability of Alzheimer's and Parkinson's diseases:
+The top risk genes for Alzheimer's disease were taken as in [this study](https://www.nature.com/articles/s41586-021-04369-3), which originally curated the list, and [this study](https://www.sciencedirect.com/science/article/pii/S0092867422014635?via%3Dihub). For Parkinson's disease, the meta-GWAS from [Nalls and colleagues](https://www.sciencedirect.com/science/article/pii/S1474442219303205?via%3Dihub) was used. From this study, the table containing odds ratios, p-values, genomic location, and nominated genes associated with Parkinson's disesase from the appendix was downloaded. These data are saved in this repository for convenience as `Nalls_et_al_2019_snps.xlsx`.  In `24_disease_GWAS_expression.R`, the eQTL-nominated genes are sorted on the p-value from model using all GWASs including random effects, and duplicated genes are collapsed into their first appearance in the list. For gene lists for both diseases, human symbols were converted to mouse symbols using a convenience function from the `NicheNetR` package. 
 ### CellChat:
 ### MultiNicheNetR:
